@@ -3,7 +3,7 @@ import FilmRow from "./FilmRow";
 
 class FilmListing extends Component {
     render() {
-        let allFilms = this.props.films.map( (film, i) => {
+        let allFilms = this.props.films.map( (film) => {
             return (
                 <FilmRow film={film} key={film.id}/>
             )
