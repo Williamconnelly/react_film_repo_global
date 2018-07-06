@@ -3,6 +3,7 @@ import './App.css';
 import FilmListing from "./FilmListing";
 import FilmDetails from "./FilmDetails";
 import TMDB from "./TMDB";
+import axios from "axios";
 
 const films = TMDB.films;
 
@@ -35,9 +36,13 @@ class App extends Component {
     }
 
     handleDetailsClick(film) {
-        console.log(`Fetching Details for`, film);
+        console.log(`Fetching Details`);
+        const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=${TMDB.api_key}&append_to_response=videos,images&language=en`
+        axios.get(url).then(data => {
+            console.log(data);
+        })
         this.setState({
-            current: film
+            current: data
         })
     }
 
