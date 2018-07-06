@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import FilmRow from "./FilmRow";
 
 class FilmListing extends Component {
-
+    constructor(props) {
+        super(props)
+        this.handleFilterClick = this.handleFilterClick.bind(this)
+        this.state = {
+            
+        }
+    }
     handleFilterClick(filter) {
         console.log(`Setting Filter to ${filter}`);
     }
