@@ -12,7 +12,7 @@ class FilmListing extends Component {
     handleFilterClick(filter) {
         console.log(`Setting Filter to ${filter}`);
         this.setState({
-            filter: filter
+            filter
         })
     }
 
@@ -23,17 +23,18 @@ class FilmListing extends Component {
             )
         })
 
-        const checkFilter = this.state.filter === 'all' ? 'is-active' : ""
+        const allClass = this.state.filter === 'all' ? 'film-list-filter is-active' : "film-list-filter"
+        const favesClass = this.state.filter === 'faves' ? 'film-list-filter is-active' : "film-list-filter"
 
         return (
             <div className="film-list">
                 <h1 className="section-title">FILMS</h1>
                 <div className="film-list-filters">
-                    <div className={"film-list-filter " + checkFilter} onClick= {() => {this.handleFilterClick("all")}}>
+                    <div className={allClass} onClick= {() => this.handleFilterClick("all")}>
                         ALL
                         <span className="section-count">{this.props.films.length}</span>
                     </div>
-                    <div className={"film-list-filter " + checkFilter} onClick= {() => {this.handleFilterClick("faves")}}>
+                    <div className={favesClass} onClick= {() => this.handleFilterClick("faves")}>
                         FAVES
                         <span className="section-count">0</span>
                     </div>
