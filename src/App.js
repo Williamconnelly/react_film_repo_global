@@ -39,9 +39,9 @@ class App extends Component {
         console.log(`Fetching Details`);
         const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=${TMDB.api_key}&append_to_response=videos,images&language=en`
         axios.get(url).then(data => {
-            console.log(data);
+            // console.log(data);
             this.setState({
-                current: data
+                current: data.data
             })
         })
     }
