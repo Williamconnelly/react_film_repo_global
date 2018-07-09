@@ -1,7 +1,6 @@
 import React from "react";
 
 const FilmDetails = props => {
-    console.log(props.film)
     const backdropUrl = `https://image.tmdb.org/t/p/w1280/${props.film.backdrop_path}`
     const posterUrl = `https://image.tmdb.org/t/p/w780/${props.film.poster_path}`
     let details
