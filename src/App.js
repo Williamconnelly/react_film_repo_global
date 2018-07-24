@@ -4,6 +4,7 @@ import FilmListing from "./FilmListing";
 import FilmDetails from "./FilmDetails";
 import TMDB from "./TMDB";
 import axios from "axios";
+import {FilmContext} from "./FilmContext";
 
 const films = TMDB.films;
 
@@ -11,6 +12,8 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            changeCurrentFilm: this.handleDetailsClick,
+            toggleFavorite: this.handleFaveToggle,
             films,
             faves: [],
             current: {}
@@ -19,7 +22,7 @@ class App extends Component {
         this.handleDetailsClick = this.handleDetailsClick.bind(this);
     }
 
-    handleFaveToggle(film) {
+    handleFaveToggle = (film) => {
         console.log("toggling fave")
         const faves = Array.from(this.state.faves)
         const filmIndex = faves.indexOf(film)
@@ -35,7 +38,7 @@ class App extends Component {
         })
     }
 
-    handleDetailsClick(film) {
+    handleDetailsClick = (film) => {
         console.log(`Fetching Details`);
         const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=${TMDB.api_key}&append_to_response=videos,images&language=en`
         axios.get(url).then(data => {
@@ -48,14 +51,12 @@ class App extends Component {
 
     render() {
         return (
-            <div className="film-library">
-                <FilmListing films={this.state.films} 
-                             faves={this.state.faves} 
-                             onFaveToggle={this.handleFaveToggle} 
-                             onDetailsClick={this.handleDetailsClick}
-                             />
-                <FilmDetails film={this.state.current} />
-            </div>
+            <FilmContext.Provider value={this.state}>
+                <div className="film-library">
+                    <FilmListing />
+                    <FilmDetails />
+                </div>
+            </FilmContext.Provider>
         );
     }
 }
